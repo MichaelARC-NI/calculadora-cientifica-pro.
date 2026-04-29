@@ -1,38 +1,38 @@
-# 🧮 Calculadora Científica Pro
+# 🧮 Calculadora Científica Pro - Michael Antonio
 
-Una calculadora web moderna, completamente responsiva y con un diseño híbrido Neumórfico/Glassmorfismo. Diseñada para realizar desde operaciones matemáticas básicas hasta cálculos científicos avanzados, ideal para estudiantes de ciencias exactas y contaduría.
+Una calculadora web de alto rendimiento con un diseño híbrido **Neumórfico/Glassmorfismo**. Esta herramienta ha sido optimizada para ofrecer una experiencia fluida tanto en dispositivos móviles como en computadoras, ideal para estudiantes y profesionales.
+
+## 🚀 Demo en Vivo
+Puedes probar la calculadora ahora mismo aquí:
+👉 **[Ver Calculadora en Vivo](https://michaelarc-ni.github.io/calculadora-cientifica-pro/)**
+
+---
 
 ## ✨ Características Principales
 
-* **Matemáticas Avanzadas:** Funciones trigonométricas (sin, cos, tan) y sus inversas, logaritmos, factoriales (`n!`) y raíces.
-* **Modo DEG/RAD:** Alternancia dinámica entre Grados y Radianes para cálculos exactos.
-* **Historial Inteligente:** Panel integrado que guarda el registro de tus últimas operaciones.
-* **Soporte de Teclado:** Uso fluido mediante el teclado numérico de la PC (Enter para `=`, Backspace para ⌫, etc.).
-* **Temas Personalizables:** Interruptor para cambiar entre Modo Claro y Modo Oscuro con transiciones suaves.
+* **Lógica Avanzada:** Soporte completo para funciones trigonométricas (DEG/RAD), logaritmos, factoriales (`n!`), potencias y raíces.
+* **Diseño Premium:** Interfaz basada en Neumorfismo con sombras dinámicas y transiciones suaves.
+* **Modo Oscuro Integrado:** Interruptor de tema para adaptarse a tus preferencias visuales.
+* **Historial de Operaciones:** Panel lateral que registra tus cálculos previos para mayor comodidad.
+* **Optimización SEO:** Configurada con meta-etiquetas para una mejor visibilidad en motores de búsqueda.
 
 ## 🛠️ Tecnologías Utilizadas
 
-Este proyecto fue construido desde cero sin usar librerías externas (Vanilla), demostrando control total sobre el DOM y la lógica del navegador:
-
-* **HTML5:** Estructura semántica.
-* **CSS3:** Variables CSS (`:root`), CSS Grid, Flexbox y sombras complejas (Neumorfismo).
-* **JavaScript (ES6+):** Manipulación del DOM, manejo de eventos, uso del objeto `Math` y evaluación segura de expresiones.
-
-## 🚀 Cómo usarlo
-
-No necesitas instalar nada. Simplemente descarga este repositorio o clónalo, y abre el archivo `index.html` en tu navegador web favorito (Chrome, Firefox, Edge, Safari).
+* **HTML5 & CSS3:** Maquetación semántica y diseño avanzado con CSS Grid y Variables.
+* **JavaScript (Vanilla):** Lógica matemática personalizada sin dependencias externas.
+* **Google Fonts:** Tipografía digital de alta legibilidad.
 
 ## 👨‍💻 Autor y Contacto
 
 **Michael Antonio Rodriguez Condega**
-Desarrollador y Creador de Contenido.
+*Desarrollador Web y Creador de Contenido.*
 
-Si te gustó este proyecto o tienes alguna pregunta, puedes conectarte conmigo en mis redes:
+Si te interesa el modding de Android o el desarrollo, sígueme en mis redes:
 
-* 📺 **YouTube:** [AndroidMovil](https://youtube.com/@androidmovil) *(Búscame como AndroidMovil)*
+* 📺 **YouTube:** [AndroidMovil](https://youtube.com/@androidmovil)
 * 📱 **TikTok:** [@michaelarc1](https://www.tiktok.com/@michaelarc1)
 * 💬 **Telegram:** [@Michael_Antonio_Rodriguez](https://t.me/Michael_Antonio_Rodriguez)
-* 🟢 **WhatsApp:** [+505 83341349](https://wa.me/50583341349)
+* 🟢 **WhatsApp:** [Contactar ahora](https://wa.me/50583341349)
 
 ---
-*Si este proyecto te fue útil, ¡no olvides dejar una ⭐ en el repositorio!*
+*Si este código te sirvió para tu aprendizaje, ¡apóyame con una ⭐ en este repositorio!*
