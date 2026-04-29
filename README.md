@@ -29,7 +29,7 @@ Desarrollador y Creador de Contenido.
 
 Si te gustó este proyecto o tienes alguna pregunta, puedes conectarte conmigo en mis redes:
 
-* 📺 **YouTube:** [AndroidMovil](https://www.youtube.com/) *(Búscame como AndroidMovil)*
+* 📺 **YouTube:** [AndroidMovil](https://youtube.com/@androidmovil) *(Búscame como AndroidMovil)*
 * 📱 **TikTok:** [@michaelarc1](https://www.tiktok.com/@michaelarc1)
 * 💬 **Telegram:** [@Michael_Antonio_Rodriguez](https://t.me/Michael_Antonio_Rodriguez)
 * 🟢 **WhatsApp:** [+505 83341349](https://wa.me/50583341349)
