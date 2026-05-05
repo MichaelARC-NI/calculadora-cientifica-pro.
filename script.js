@@ -16,19 +16,23 @@ function toggleDegRad() {
 }
 
 function addChar(char) {
-    if (display.value === 'Error') clearAll();
+    if (display.value.includes('Error')) {
+        updateDisplay(); // Restaura la vista si estaba mostrando un error
+    }
     currentExpression += char;
     updateDisplay();
 }
 
 function addFunc(func) {
-    if (display.value === 'Error') clearAll();
+    if (display.value.includes('Error')) {
+        updateDisplay();
+    }
     currentExpression += `Math.${func}(`;
     updateDisplay();
 }
 
 function factorial(n) {
-    if (n < 0) return NaN;
+    if (n < 0) return NaN; // Esto disparará el Math Error correctamente
     if (n === 0 || n === 1) return 1;
     let res = 1;
     for (let i = 2; i <= n; i++) res *= i;
@@ -36,7 +40,9 @@ function factorial(n) {
 }
 
 function addFact() {
-    if (display.value === 'Error') clearAll();
+    if (display.value.includes('Error')) {
+        updateDisplay();
+    }
     currentExpression += `factorial(`;
     updateDisplay();
 }
@@ -55,33 +61,78 @@ function calculate() {
     try {
         if(currentExpression.trim() === "") return;
         let evalExp = currentExpression;
+
+        // 1. Autocompletar paréntesis faltantes al final
+        let openP = (evalExp.match(/\(/g) || []).length;
+        let closeP = (evalExp.match(/\)/g) || []).length;
+        while(openP > closeP) { 
+            evalExp += ')'; 
+            closeP++; 
+        }
+
+        // 2. Multiplicación implícita (ej. 2(3) -> 2*(3) o 5Math.sin -> 5*Math.sin)
+        evalExp = evalExp.replace(/(\d)(\()/g, '$1*(');
+        evalExp = evalExp.replace(/(\d)(Math)/g, '$1*$2');
+        evalExp = evalExp.replace(/(\))(Math)/g, '$1*$2');
+        evalExp = evalExp.replace(/(\))(\()/g, '$1*(');
+        evalExp = evalExp.replace(/(\d)(factorial)/g, '$1*$2');
+        evalExp = evalExp.replace(/(\))(factorial)/g, '$1*$2');
+
+        // 3. Eliminar operadores matemáticos sueltos al final (+, -, *, /)
+        evalExp = evalExp.replace(/[+\-*/.]$/, '');
         
+        // 4. Porcentajes
         evalExp = evalExp.replace(/%/g, '/100');
 
+        // 5. Conversión a Grados/Radianes
         if (isDeg) {
             evalExp = evalExp.replace(/sin\(([^)]+)\)/g, 'sin(($1) * Math.PI / 180)');
             evalExp = evalExp.replace(/cos\(([^)]+)\)/g, 'cos(($1) * Math.PI / 180)');
             evalExp = evalExp.replace(/tan\(([^)]+)\)/g, 'tan(($1) * Math.PI / 180)');
-            
             evalExp = evalExp.replace(/asin\(([^)]+)\)/g, '(asin($1) * 180 / Math.PI)');
             evalExp = evalExp.replace(/acos\(([^)]+)\)/g, '(acos($1) * 180 / Math.PI)');
             evalExp = evalExp.replace(/atan\(([^)]+)\)/g, '(atan($1) * 180 / Math.PI)');
         }
 
+        // 6. Evaluar la expresión segura
         let result = eval(evalExp);
-        if (isNaN(result) || !isFinite(result)) throw new Error();
+        
+        // 7. Validaciones de resultados matemáticos inválidos
+        if (isNaN(result)) throw new Error("Math Error");
+        if (!isFinite(result)) throw new Error("Infinity Error");
 
         result = parseFloat(result.toFixed(8));
         
+        // Preparamos la vista visual correcta (con los paréntesis que agregamos si faltaban)
         let view = display.value;
-        addToHistory(view + " = " + result);
+        let cleanView = view;
+        let vOpen = (view.match(/\(/g) || []).length;
+        let vClose = (view.match(/\)/g) || []).length;
+        while(vOpen > vClose) { cleanView += ')'; vClose++; }
+
+        addToHistory(cleanView + " = " + result);
         
-        expressionDiv.innerText = view + " =";
+        expressionDiv.innerText = cleanView + " =";
         display.value = result;
         currentExpression = result.toString();
+        
     } catch (e) {
-        display.value = "Error";
-        setTimeout(clearAll, 1500);
+        // Manejo de errores detallado
+        let errorMsg = "Error";
+        if(e.message === "Math Error" || e.message === "Infinity Error") {
+            errorMsg = "Math Error"; // División por cero, raíz de negativo
+        } else {
+            errorMsg = "Sintaxis Error"; // Faltan operadores, mal escrita
+        }
+        
+        display.value = errorMsg;
+        
+        // Restaurar la expresión original después de 1.5s para no perder el trabajo
+        setTimeout(() => {
+            if (display.value === errorMsg) {
+                updateDisplay();
+            }
+        }, 1500);
     }
 }
 
@@ -104,7 +155,9 @@ function backspace() {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key >= '0' && e.key <= '9' || ['+', '-', '*', '/', '.', '(', ')', '%'].includes(e.key)) addChar(e.key);
+    if (e.key >= '0' && e.key <= '9' || ['+', '-', '*', '/', '.', '(', ')', '%'].includes(e.key)) {
+        addChar(e.key);
+    }
     if (e.key === 'Enter') { e.preventDefault(); calculate(); }
     if (e.key === 'Backspace') backspace();
     if (e.key === 'Escape') clearAll();
